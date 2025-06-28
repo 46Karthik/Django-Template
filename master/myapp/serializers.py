@@ -32,8 +32,3 @@ class RegisterSerializer(serializers.ModelSerializer):
         )
 
         return user
-
-class CRMSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = CRM
-        fields = '__all__'

@@ -38,36 +38,3 @@ class LoginView(APIView):
             'refresh': str(refresh),
             'access': str(refresh.access_token),
         }), status=status.HTTP_201_CREATED)
-
-class CRMView(APIView):
-    permission_classes = [IsAuthenticated]
-    def get(self, request,id = None):
-        if id is not None:
-            crm = CRM.objects.get(crm_id=id)
-            serializer = CRMSerializer(crm)
-            return Response(return_response(2, 'Success', serializer.data), status=status.HTTP_200_OK)
-        all_data = CRM.objects.all()
-        serializer = CRMSerializer(all_data, many=True)
-        return Response(return_response(2, 'Success', serializer.data), status=status.HTTP_200_OK)
-    def post(self, request):
-        serializer = CRMSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(return_response(2, 'Saved Successfully', serializer.data), status=status.HTTP_201_CREATED)
-        return Response(return_response(0, 'Error', serializer.errors), status=status.HTTP_400_BAD_REQUEST)
-    def put(self, request):
-        crm_instance = CRM.objects.get(crm_id=request.data['crm_id'])
-        serializer = CRMSerializer(crm_instance, data=request.data, partial=True)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(return_response(2, 'Updated Successfully', serializer.data), status=status.HTTP_200_OK)
-        return Response(return_response(0, 'Error', serializer.errors), status=status.HTTP_400_BAD_REQUEST)
-
-
-
-class DashboardView(APIView):
-    permission_classes = [IsAuthenticated]
-    def get(self, request):
-        all_data = CRM.objects.all()
-        serializer = CRMSerializer(all_data, many=True)
-        return Response(return_response(2, 'Success', serializer.data), status=status.HTTP_200_OK)
