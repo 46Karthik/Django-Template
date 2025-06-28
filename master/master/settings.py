@@ -110,7 +110,7 @@ SIMPLE_JWT = {
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'test',  
+        'NAME': 'test1',  
         'USER': 'admin', 
         'PASSWORD': 'onroadzadmin123',  
         'HOST':  'databaseonroadz.clasi4mc0uw2.ap-south-1.rds.amazonaws.com',  
