@@ -32,7 +32,11 @@ class Profile(models.Model):
     phone = models.CharField(max_length=100, null=True, blank=True)
     password = models.CharField(max_length=100, null=True, blank=True)
     is_admin = models.BooleanField(default=False)
-    is_active = models.BooleanField(default=False)
+    is_active = models.IntegerField(default=2)
+    created_by = models.CharField(max_length=100)
+    updated_by = models.CharField(max_length=100)
+    created_at = models.DateTimeField(auto_now_add=True, null=True,blank=True)
+    updated_at = models.DateTimeField(auto_now=True, null=True,blank=True)
 
     def __str__(self):
         return self.name or self.user.username
